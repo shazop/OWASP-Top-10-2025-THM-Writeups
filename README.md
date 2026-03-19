@@ -1,4 +1,4 @@
-## IAAA Failures(1/3)
+# IAAA Failures(1/3)
 
 ### What is IAAA?
 
@@ -64,7 +64,7 @@ We can see the timing between each request is very less which is in miliseconds,
 
      **Answer:** `/supersecretadminstuff`
      
-## Application Design Flaws(2/3)
+# Application Design Flaws(2/3)
 
 ### AS02: Security Misconfigurations
 
@@ -84,7 +84,7 @@ Directory bruteforcing `/api` endpoints reveals few other directories. In `/api/
 
 Flag: `THM{V3RB0S3_3RR0R_L34K}`
 
-### AS03: Software Supply Chain Failures
+## AS03: Software Supply Chain Failures
 
 Here they have given one python file and the challenge link.
 
@@ -116,3 +116,77 @@ So our value is `debug`, which reveals the flag.
 
 
 Flag: `THM{SUPPLY_CH41N_VULN3R4B1L1TY}`
+
+
+## AS04: Cryptographic Failures
+
+Challenge Link: `http://10.49.154.138:5004/`
+
+Were we can see a Encrypted text in the index page 
+
+<img width="1691" height="526" alt="image" src="https://github.com/user-attachments/assets/38a993b7-7cd6-4fbc-b99f-fcc3612dd85a" />
+
+```
+Nzd42HZGgUIUlpILZRv0jeIXp1WtCErwR+j/w/lnKbmug31opX0BWy+pwK92rkhjwdf94mgHfLtF26X6B3pe2fhHXzIGnnvVruH7683KwvzZ6+QKybFWaedAEtknYkhe
+```
+
+Anaylsing the source code we can see a js file called `decrypt.js` which revealed the secret key and algorithm of the encryption
+
+<img width="493" height="233" alt="image" src="https://github.com/user-attachments/assets/a6c0b178-31d4-4736-94bd-536619e73226" />
+
+
+Algorithm: `AES`
+
+Cipher Mode: `ECB`
+
+Padding: `No Padding`
+
+Key-Size: `128`
+
+Key: `my-secret-key-16`
+
+Now lets decrypt it using decryptors in online like https://www.devglan.com/online-tools/aes-encryption-decryption
+
+Which reveals the flag:
+
+<img width="631" height="826" alt="image" src="https://github.com/user-attachments/assets/b6b1f07a-0b9e-4232-8194-45283cee8781" />
+
+
+Flag: `THM{CRYPTO_FAILURE_H4RDCOD3D_K3Y}`
+
+## AS06: Insecure Design
+
+Challenge Link: `http://10.49.154.138:5005`
+
+Writeup: 
+
+<img width="1522" height="832" alt="image" src="https://github.com/user-attachments/assets/ad8bccde-0292-4c33-9900-37d69883fe25" />
+
+
+Hitting `/api/users/admin` this endpoint reveals 
+
+<img width="520" height="197" alt="image" src="https://github.com/user-attachments/assets/e92e2018-4d1d-4b7b-9625-ad3cb5b1061b" />
+
+
+We can see /api/users/admin gives some data lets try fuzzing the endpoint after /api/ with /admin maybe we can get endpoints like `/api/profile/admin` or `/api/data/admin`
+
+Fuzzing with ffuf: 
+
+Command: 
+
+```
+ffuf -u http://10.49.154.138:5005/api/FUZZ/admin -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt
+```
+
+<img width="1113" height="526" alt="image" src="https://github.com/user-attachments/assets/dc495733-5c29-4345-857a-4d373d8d3c36" />
+
+We get `/messages` endpoints which reveals the flag:
+
+<img width="831" height="322" alt="image" src="https://github.com/user-attachments/assets/7b9e908e-80c8-4ffe-bfb2-00ca77ff1289" />
+
+Flag: `THM{1NS3CUR3_D35IGN_4SSUMPT10N}`
+
+
+
+
+
