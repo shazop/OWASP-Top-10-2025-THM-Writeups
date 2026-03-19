@@ -187,6 +187,22 @@ We get `/messages` endpoints which reveals the flag:
 Flag: `THM{1NS3CUR3_D35IGN_4SSUMPT10N}`
 
 
+# Insecure Data Handling(3/3)
 
+Writeup:
 
+We got an challenge website where 3 letters of the xor key is revealed and we need to find the one letter of the key to decrypt the flag
 
+<img width="1495" height="643" alt="image" src="https://github.com/user-attachments/assets/1497e400-98fa-4d0f-947d-ad07c8834f2b" />
+
+So we can bruteforce which burp and find the key.
+
+Setting up the burp intruder and selecting the last character of the key and select bruteforce mode in the intruder 
+
+<img width="1872" height="799" alt="image" src="https://github.com/user-attachments/assets/e5a4a3c4-8755-4c27-b23d-68c689768899" />
+
+Now filter the responses with Length we can see 1 has the highest length lets try `KEY1` .
+
+<img width="1800" height="619" alt="image" src="https://github.com/user-attachments/assets/94c04b53-8461-47f4-86dc-4757b3231043" />
+
+Flag: `THM{WEAK_CRYPTO_FLAG}`
