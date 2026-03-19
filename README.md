@@ -1,6 +1,6 @@
 ## IAAA Failures(1/3)
 
-### Task 02: What is IAAA?
+### What is IAAA?
 
 **What does IAAA stand for?**
 
