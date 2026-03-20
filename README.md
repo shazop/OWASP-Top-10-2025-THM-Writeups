@@ -153,6 +153,8 @@ Which reveals the flag:
 
 <img width="631" height="826" alt="image" src="https://github.com/user-attachments/assets/b6b1f07a-0b9e-4232-8194-45283cee8781" />
 
+Flag: `THM{CRYPTO_FAILURE_H4RDCOD3D_K3Y}`
+
 ## A05: Injection
 
 Writeup: 
@@ -167,7 +169,7 @@ Class SSTI Payload:
 
 Flag: ```THM{SSTI_FLAG_OBTAINED}```
 
-Flag: `THM{CRYPTO_FAILURE_H4RDCOD3D_K3Y}`
+
 
 ## AS06: Insecure Design
 
